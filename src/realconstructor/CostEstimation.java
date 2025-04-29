@@ -11,22 +11,18 @@ public class CostEstimation extends ConstructionMaterial {
 
     @Override
     public void receiveMaterial(double quantity) {
-        
     }
 
     @Override
     public void useMaterial(double quantity) {
-        
     }
 
     @Override
     public void estimateCost(double quantityUsed) {
         int costPerTon = (quantityUsed > 15) ? 180000 : 200000;
         double totalCost = quantityUsed * costPerTon;
-
         NumberFormat formatter = NumberFormat.getCurrencyInstance(new Locale("en", "RW"));
         formatter.setMaximumFractionDigits(2);
-
         System.out.println("\n=== Cost Estimation ===");
         System.out.println("Contractor ID: " + contractorId);
         System.out.println("Contractor Name: " + contractorName);

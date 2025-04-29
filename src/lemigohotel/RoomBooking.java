@@ -8,15 +8,15 @@ public class RoomBooking extends HotelService {
     @Override
     public void bookRoom() {
         if (stayDays < 1 || stayDays > 30) {
-            System.out.println("Stay duration must be between 1 and 30 days.");
+            System.out.println("[Booking Error] Stay duration is out of allowed range.");
             return;
         }
 
         if (roomStatus.equals("AVAILABLE")) {
             roomStatus = "OCCUPIED";
-            System.out.println("Room successfully booked for " + guestName + " in a " + roomType + " room for " + stayDays + " days.");
+            System.out.println("✅ Booking confirmed for " + guestName + ": " + roomType + " room for " + stayDays + " day(s).");
         } else {
-            System.out.println("Room is already occupied.");
+            System.out.println("[Booking Failed] Room is currently not available.");
         }
     }
 

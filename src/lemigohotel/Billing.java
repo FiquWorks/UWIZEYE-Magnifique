@@ -12,7 +12,7 @@ public class Billing extends HotelService {
             case "DELUXE" -> 80000;
             case "SUITE" -> 120000;
             default -> {
-                System.out.println("Invalid room type.");
+                System.out.println("[Billing Error] Unknown room type.");
                 yield 0;
             }
         };
@@ -21,12 +21,13 @@ public class Billing extends HotelService {
 
         int totalCost = costPerNight * stayDays;
 
-        System.out.println("=== Bill ===");
-        System.out.println("Guest Name: " + guestName);
-        System.out.println("Guest ID: " + guestId);
-        System.out.println("Room Type: " + roomType);
-        System.out.println("Days Stayed: " + stayDays);
-        System.out.println("Total Cost: " + totalCost + " RWF");
+        System.out.println("------ Hotel Billing Summary ------");
+        System.out.println("Guest ID     : " + guestId);
+        System.out.println("Guest Name   : " + guestName);
+        System.out.println("Room Type    : " + roomType);
+        System.out.println("Stay (days)  : " + stayDays);
+        System.out.println("Total Amount : " + totalCost + " RWF");
+        System.out.println("-----------------------------------");
     }
 
     @Override

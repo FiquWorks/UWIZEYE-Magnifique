@@ -10,9 +10,9 @@ public class GuestCheckout extends HotelService {
     public void checkoutGuest() {
         if (roomStatus.equals("OCCUPIED")) {
             roomStatus = "AVAILABLE";
-            System.out.println("Guest " + guestName + " has successfully checked out.");
+            System.out.println("✅ Checkout complete for guest: " + guestName);
         } else {
-            System.out.println("Room is already available. No checkout needed.");
+            System.out.println("[Checkout Info] Room was already available.");
         }
     }
 

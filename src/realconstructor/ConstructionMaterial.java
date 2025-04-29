@@ -3,7 +3,7 @@ package realconstructor;
 public abstract class ConstructionMaterial {
     protected String contractorId;
     protected String contractorName;
-    protected double materialQuantity; 
+    protected double materialQuantity;
     protected double materialBalance;
 
     public ConstructionMaterial(String contractorId, String contractorName, double materialQuantity, double materialBalance) {
@@ -19,7 +19,6 @@ public abstract class ConstructionMaterial {
 
     public abstract void estimateCost(double quantityUsed);
 
-    // Getters
     public double getMaterialBalance() {
         return materialBalance;
     }
