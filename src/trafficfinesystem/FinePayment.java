@@ -5,15 +5,15 @@ public class FinePayment extends TrafficRecord {
     @Override
     public void processPayment() {
         System.out.println("\n--- Payment Section ---");
-        if (paymentStatus.equals("PAID")) {
-            System.out.println("Error: Fine is already paid.");
+        if ("PAID".equals(paymentStatus)) {
+            System.out.println("Payment already completed.");
         } else {
             paymentStatus = "PAID";
-            System.out.println("Payment successful! Here is your receipt:");
+            System.out.println("Payment successful. Receipt:");
             System.out.println("Driver: " + driverName);
             System.out.println("Plate: " + vehiclePlate);
-            System.out.println("Paid Amount: " + fineAmount + " RWF");
-            System.out.println("Payment Status: " + paymentStatus + "\n");
+            System.out.println("Amount Paid: " + fineAmount + " RWF");
+            System.out.println("Status: " + paymentStatus + "\n");
         }
     }
 

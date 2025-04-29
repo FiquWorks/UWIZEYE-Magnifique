@@ -10,13 +10,14 @@ public class FineAssessment extends TrafficRecord {
             case "NO_HELMET": fineAmount = 30000; break;
             case "DUI": fineAmount = 150000; break;
             default:
-                System.out.println("Unknown violation type. Cannot assess fine.");
+                System.out.println("Violation not recognized. Fine not calculated.");
                 return;
         }
+
         System.out.println("\n--- Fine Assessed ---");
         System.out.println("Driver: " + driverName);
         System.out.println("Violation: " + violationType);
-        System.out.println("Fine to Pay: " + fineAmount + " RWF\n");
+        System.out.println("Fine Amount: " + fineAmount + " RWF\n");
     }
 
     @Override
