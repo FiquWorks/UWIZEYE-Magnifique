@@ -1,16 +1,11 @@
-# Use JDK 17 official image as the base
-FROM openjdk:17-jdk-alpine
+# Use a slim OpenJDK image
+FROM openjdk:17-slim
 
-# Set working directory in container
+# Set the working directory in the container
 WORKDIR /app
 
-# Copy Java source files into the container
-COPY src/ ./src
+# Copy compiled Java classes from host to container
+COPY bin/ ./bin/
 
-# Compile Java files into /app/bin
-RUN mkdir bin && \
-    find ./src -name "*.java" > sources.txt && \
-    javac -d bin @sources.txt
-
-# Run the main class from Question 1 (Adjust to your actual main class)
-CMD ["java", "-cp", "bin", "trafficfinesystem.Main"]
+# Set the entrypoint to run your MainLauncher
+CMD ["java", "-cp", "bin", "MainLauncher"]
