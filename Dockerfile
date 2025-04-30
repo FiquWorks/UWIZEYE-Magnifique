@@ -13,4 +13,4 @@ RUN mkdir bin && \
     javac -d bin @sources.txt
 
 # Run the main class from Question 1 (Adjust to your actual main class)
-CMD ["java", "-cp", "bin", "lemigohotel.Main"]
+CMD ["java", "-cp", "bin", "realconstructor.Main"]
