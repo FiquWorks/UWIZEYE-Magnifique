@@ -1,11 +1,7 @@
 package trafficfinesystem;
 
-import java.util.Scanner;
-
-public class Main {
+public class TrafficMain {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-
         ViolationEntry entry = new ViolationEntry();
         entry.recordViolation();
 
@@ -25,7 +21,5 @@ public class Main {
         payment.fineAmount = assessment.fineAmount;
         payment.paymentStatus = assessment.paymentStatus;
         payment.processPayment();
-
-        scanner.close();
     }
 }
