@@ -1,4 +1,5 @@
 import java.util.InputMismatchException;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 import lemigohotel.HotelMain;
@@ -18,13 +19,22 @@ public class MainLauncher {
 
             System.out.print("Select a project to run: ");
             int choice;
+
             try {
+                if (!scanner.hasNext()) {
+                    // No input (user hit Ctrl+D or closed stream)
+                    System.out.println("\n[Error] No input received. Exiting launcher.");
+                    break;
+                }
                 choice = scanner.nextInt();
-                scanner.nextLine(); // clear newline character
+                scanner.nextLine(); // clear leftover newline
             } catch (InputMismatchException e) {
                 System.out.println("[Error] Please enter a valid number.");
                 scanner.nextLine(); // clear invalid input
                 continue;
+            } catch (NoSuchElementException e) {
+                System.out.println("[Error] Input stream closed unexpectedly. Exiting launcher.");
+                break;
             }
 
             switch (choice) {
@@ -47,5 +57,7 @@ public class MainLauncher {
 
             System.out.println(); // spacing after each run
         }
+
+        scanner.close(); // close scanner at the end safely
     }
 }
