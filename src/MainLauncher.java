@@ -1,4 +1,3 @@
-import java.util.InputMismatchException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
@@ -18,23 +17,25 @@ public class MainLauncher {
             System.out.println("0. Exit");
 
             System.out.print("Select a project to run: ");
-            int choice;
+            String input;
 
             try {
-                if (!scanner.hasNext()) {
-                    // No input (user hit Ctrl+D or closed stream)
+                if (!scanner.hasNextLine()) {
                     System.out.println("\n[Error] No input received. Exiting launcher.");
                     break;
                 }
-                choice = scanner.nextInt();
-                scanner.nextLine(); // clear leftover newline
-            } catch (InputMismatchException e) {
-                System.out.println("[Error] Please enter a valid number.");
-                scanner.nextLine(); // clear invalid input
-                continue;
+                input = scanner.nextLine().trim();
             } catch (NoSuchElementException e) {
                 System.out.println("[Error] Input stream closed unexpectedly. Exiting launcher.");
                 break;
+            }
+
+            int choice;
+            try {
+                choice = Integer.parseInt(input);
+            } catch (NumberFormatException e) {
+                System.out.println("[Error] Please enter a valid number.");
+                continue;
             }
 
             switch (choice) {
@@ -58,6 +59,6 @@ public class MainLauncher {
             System.out.println(); // spacing after each run
         }
 
-        scanner.close(); // close scanner at the end safely
+        scanner.close(); // just in case
     }
 }
