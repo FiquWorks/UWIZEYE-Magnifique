@@ -9,8 +9,9 @@ public class MainLauncher {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
+        mainLoop:
         while (true) {
-            System.out.println("=== Multi-Project Launcher ===");
+            System.out.println("\n=== Multi-Project Launcher ===");
             System.out.println("1. Lemigo Hotel Management System");
             System.out.println("2. Real Constructor Material Management");
             System.out.println("3. Traffic Fine System");
@@ -26,39 +27,28 @@ public class MainLauncher {
                 }
                 input = scanner.nextLine().trim();
             } catch (NoSuchElementException e) {
-                System.out.println("[Error] Input stream closed unexpectedly. Exiting launcher.");
+                System.out.println("\n[Error] Input stream closed unexpectedly. Exiting launcher.");
                 break;
             }
 
-            int choice;
-            try {
-                choice = Integer.parseInt(input);
-            } catch (NumberFormatException e) {
-                System.out.println("[Error] Please enter a valid number.");
-                continue;
-            }
-
-            switch (choice) {
-                case 1:
+            switch (input) {
+                case "1":
                     HotelMain.main(null);
                     break;
-                case 2:
+                case "2":
                     ConstructorMain.main(null);
                     break;
-                case 3:
+                case "3":
                     TrafficMain.main(null);
                     break;
-                case 0:
+                case "0":
                     System.out.println("Exiting launcher. Goodbye!");
-                    scanner.close();
-                    return;
+                    break mainLoop;
                 default:
                     System.out.println("[Error] Invalid option. Please select 0–3.");
             }
-
-            System.out.println(); // spacing after each run
         }
 
-        scanner.close(); // just in case
+        scanner.close();
     }
 }
