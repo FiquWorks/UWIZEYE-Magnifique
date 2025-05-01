@@ -1,11 +1,14 @@
-# Use a slim OpenJDK image
-FROM openjdk:17-slim
+# Use OpenJDK 8 as base image
+FROM openjdk:8
 
-# Set the working directory in the container
+# Create a working directory inside the container
 WORKDIR /app
 
-# Copy compiled Java classes from host to container
-COPY bin/ ./bin/
+# Copy the entire source code
+COPY ./src /app/src
 
-# Set the entrypoint to run your MainLauncher
-CMD ["java", "-cp", "bin", "MainLauncher"]
+# Compile all .java files inside the three packages
+RUN javac src/lemigohotel/*.java src/realconstructor/*.java src/trafficfinesystem/*.java src/MainLauncher.java
+
+# Run MainLauncher
+CMD ["java", "-cp", "src", "MainLauncher"]
