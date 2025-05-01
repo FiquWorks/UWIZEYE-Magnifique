@@ -7,33 +7,41 @@ public class ViolationEntry extends TrafficRecord {
 
     @Override
     public void recordViolation() {
-        System.out.print("Driver National ID (16 digits): ");
-        driverId = scanner.nextLine();
-        while (!driverId.matches("\\d{16}")) {
-            System.out.print("Invalid ID. Enter exactly 16 digits: ");
-            driverId = scanner.nextLine();
-        }
+        
+        do {
+            System.out.print("Driver National ID (16 digits): ");
+            driverId = scanner.nextLine().trim();
+            if (!driverId.matches("\\d{16}")) {
+                System.out.println("[Error] ID must be exactly 16 digits.");
+            }
+        } while (!driverId.matches("\\d{16}"));
 
-        System.out.print("Driver Name: ");
-        driverName = scanner.nextLine();
-        while (!driverName.matches("[a-zA-Z\\s]+")) {
-            System.out.print("Invalid name. Use only letters: ");
-            driverName = scanner.nextLine();
-        }
+        
+        do {
+            System.out.print("Driver Name: ");
+            driverName = scanner.nextLine().trim();
+            if (!driverName.matches("[a-zA-Z ]{2,}")) {
+                System.out.println("[Error] Name must contain only letters and spaces (min 2 characters).");
+            }
+        } while (!driverName.matches("[a-zA-Z ]{2,}"));
 
-        System.out.print("Vehicle Plate (e.g., RAB123D): ");
-        vehiclePlate = scanner.nextLine();
-        while (!vehiclePlate.matches("[A-Z]{3}\\d{3}[A-Z]")) {
-            System.out.print("Invalid plate format. Try again (e.g., RAB123D): ");
-            vehiclePlate = scanner.nextLine();
-        }
+        
+        do {
+            System.out.print("Vehicle Plate (e.g., RAB123D): ");
+            vehiclePlate = scanner.nextLine().trim().toUpperCase();
+            if (!vehiclePlate.matches("^R[A-Z]{2}\\d{3}[A-Z]$")) {
+                System.out.println("[Error] Plate must be in format RAB123D.");
+            }
+        } while (!vehiclePlate.matches("^R[A-Z]{2}\\d{3}[A-Z]$"));
 
-        System.out.print("Violation Type (SPEEDING, RED_LIGHT, NO_HELMET, DUI): ");
-        violationType = scanner.nextLine().toUpperCase();
-        while (!violationType.matches("SPEEDING|RED_LIGHT|NO_HELMET|DUI")) {
-            System.out.print("Invalid type. Enter again: ");
-            violationType = scanner.nextLine().toUpperCase();
-        }
+        
+        do {
+            System.out.print("Violation Type (SPEEDING, RED_LIGHT, NO_HELMET, DUI): ");
+            violationType = scanner.nextLine().trim().toUpperCase();
+            if (!violationType.matches("SPEEDING|RED_LIGHT|NO_HELMET|DUI")) {
+                System.out.println("[Error] Invalid type. Choose from: SPEEDING, RED_LIGHT, NO_HELMET, DUI.");
+            }
+        } while (!violationType.matches("SPEEDING|RED_LIGHT|NO_HELMET|DUI"));
 
         paymentStatus = "UNPAID";
 

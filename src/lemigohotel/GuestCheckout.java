@@ -1,23 +1,30 @@
 package lemigohotel;
 
 public class GuestCheckout extends HotelService {
-    public GuestCheckout(String guestId, String guestName, String roomType, int stayDays) {
-        super(guestId, guestName, roomType, stayDays);
-        this.roomStatus = "OCCUPIED";
+    public GuestCheckout(String guestId, String guestName) {
+        super(guestId, guestName);
     }
 
     @Override
     public void checkoutGuest() {
-        if (roomStatus.equals("OCCUPIED")) {
-            roomStatus = "AVAILABLE";
-            System.out.println("✅ Checkout complete for guest: " + guestName);
-        } else {
-            System.out.println("[Checkout Info] Room was already available.");
+        if (!"OCCUPIED".equals(roomStatus)) {
+            throw new IllegalStateException("Cannot checkout - room is not occupied");
         }
+        
+        roomStatus = "AVAILABLE";
+        System.out.println("\n✅ Checkout Complete");
+        System.out.println("------------------");
+        System.out.println("Guest: " + guestName + " (" + guestId + ")");
+        System.out.println("Status: " + roomStatus);
     }
 
     @Override
-    public void bookRoom() {}
+    public void bookRoom() {
+        throw new UnsupportedOperationException("GuestCheckout cannot book rooms");
+    }
+
     @Override
-    public void generateBill() {}
+    public void generateBill() {
+        throw new UnsupportedOperationException("GuestCheckout cannot generate bills");
+    }
 }

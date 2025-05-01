@@ -4,13 +4,26 @@ public class FineAssessment extends TrafficRecord {
 
     @Override
     public void assessFine() {
+        if (violationType == null || violationType.isEmpty()) {
+            System.out.println("[Error] Violation type is missing. Cannot assess fine.");
+            return;
+        }
+
         switch (violationType.toUpperCase()) {
-            case "SPEEDING": fineAmount = 50000; break;
-            case "RED_LIGHT": fineAmount = 80000; break;
-            case "NO_HELMET": fineAmount = 30000; break;
-            case "DUI": fineAmount = 150000; break;
+            case "SPEEDING":
+                fineAmount = 50000;
+                break;
+            case "RED_LIGHT":
+                fineAmount = 80000;
+                break;
+            case "NO_HELMET":
+                fineAmount = 30000;
+                break;
+            case "DUI":
+                fineAmount = 150000;
+                break;
             default:
-                System.out.println("Violation not recognized. Fine not calculated.");
+                System.out.println("[Error] Violation not recognized. Fine not calculated.");
                 return;
         }
 

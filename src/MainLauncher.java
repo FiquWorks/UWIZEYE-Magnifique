@@ -34,13 +34,13 @@ public class MainLauncher {
 
                     switch (choice) {
                         case 1:
-                            HotelMain.main(null);
+                            HotelMain.run(scanner);
                             break;
                         case 2:
-                            ConstructorMain.main(null);
+                            ConstructorMain.run(scanner);
                             break;
                         case 3:
-                            TrafficMain.main(null);
+                            TrafficMain.run(scanner);
                             break;
                         case 0:
                             System.out.println("Exiting launcher. Goodbye!");
@@ -54,7 +54,7 @@ public class MainLauncher {
                     System.out.println("[Error] An unexpected error occurred: " + e.getMessage());
                 }
 
-                System.out.println(); // spacing after each loop
+                System.out.println(); 
             }
         } catch (Exception e) {
             System.out.println("[Error] Critical failure: " + e.getMessage());

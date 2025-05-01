@@ -7,21 +7,26 @@ public class RoomBooking extends HotelService {
 
     @Override
     public void bookRoom() {
-        if (stayDays < 1 || stayDays > 30) {
-            System.out.println("[Booking Error] Stay duration is out of allowed range.");
-            return;
+        if (!"AVAILABLE".equals(roomStatus)) {
+            throw new IllegalStateException("Cannot book room - current status: " + roomStatus);
         }
-
-        if (roomStatus.equals("AVAILABLE")) {
-            roomStatus = "OCCUPIED";
-            System.out.println("✅ Booking confirmed for " + guestName + ": " + roomType + " room for " + stayDays + " day(s).");
-        } else {
-            System.out.println("[Booking Failed] Room is currently not available.");
-        }
+        
+        roomStatus = "OCCUPIED";
+        System.out.println("\n✅ Booking Confirmation");
+        System.out.println("----------------------");
+        System.out.println("Guest: " + guestName + " (" + guestId + ")");
+        System.out.println("Room Type: " + roomType);
+        System.out.println("Duration: " + stayDays + " nights");
+        System.out.println("Status: " + roomStatus);
     }
 
     @Override
-    public void checkoutGuest() {}
+    public void checkoutGuest() {
+        throw new UnsupportedOperationException("RoomBooking cannot process checkouts");
+    }
+
     @Override
-    public void generateBill() {}
+    public void generateBill() {
+        throw new UnsupportedOperationException("RoomBooking cannot generate bills");
+    }
 }

@@ -1,37 +1,47 @@
 package lemigohotel;
 
+import java.text.NumberFormat;
+import java.util.Locale;
+
 public class Billing extends HotelService {
+    private static final int STANDARD_RATE = 50000;
+    private static final int DELUXE_RATE = 80000;
+    private static final int SUITE_RATE = 120000;
+
     public Billing(String guestId, String guestName, String roomType, int stayDays) {
         super(guestId, guestName, roomType, stayDays);
     }
 
     @Override
     public void generateBill() {
-        int costPerNight = switch (roomType.toUpperCase()) {
-            case "STANDARD" -> 50000;
-            case "DELUXE" -> 80000;
-            case "SUITE" -> 120000;
-            default -> {
-                System.out.println("[Billing Error] Unknown room type.");
-                yield 0;
-            }
+        int rate = switch (roomType) {
+            case "STANDARD" -> STANDARD_RATE;
+            case "DELUXE" -> DELUXE_RATE;
+            case "SUITE" -> SUITE_RATE;
+            default -> throw new IllegalStateException("Invalid room type: " + roomType);
         };
 
-        if (costPerNight == 0) return;
+        int total = rate * stayDays;
+        NumberFormat fmt = NumberFormat.getCurrencyInstance(new Locale("en", "RW"));
+        fmt.setMaximumFractionDigits(0);
 
-        int totalCost = costPerNight * stayDays;
-
-        System.out.println("------ Hotel Billing Summary ------");
-        System.out.println("Guest ID     : " + guestId);
-        System.out.println("Guest Name   : " + guestName);
-        System.out.println("Room Type    : " + roomType);
-        System.out.println("Stay (days)  : " + stayDays);
-        System.out.println("Total Amount : " + totalCost + " RWF");
-        System.out.println("-----------------------------------");
+        System.out.println("\n💵 Billing Statement");
+        System.out.println("------------------");
+        System.out.println("Guest: " + guestName + " (" + guestId + ")");
+        System.out.println("Room Type: " + roomType);
+        System.out.println("Nights: " + stayDays);
+        System.out.println("Rate: " + fmt.format(rate) + "/night");
+        System.out.println("------------------");
+        System.out.println("TOTAL: " + fmt.format(total));
     }
 
     @Override
-    public void bookRoom() {}
+    public void bookRoom() {
+        throw new UnsupportedOperationException("Billing cannot book rooms");
+    }
+
     @Override
-    public void checkoutGuest() {}
+    public void checkoutGuest() {
+        throw new UnsupportedOperationException("Billing cannot process checkouts");
+    }
 }
